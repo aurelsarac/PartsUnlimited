@@ -12,6 +12,7 @@ using PartsUnlimited.Models;
 
 namespace PartsUnlimited.WebJobs.UpdateProductInventory
 {
+    //Functions
     public class Functions
     {
         public async static Task UpdateProductProcessTaskAsync([QueueTrigger("product")] ProductMessage message)
@@ -20,7 +21,7 @@ namespace PartsUnlimited.WebJobs.UpdateProductInventory
             builder.Add(new JsonConfigurationSource { Path = "config.json" });
             var config = builder.Build();
             var connectionString = config["Data:DefaultConnection:ConnectionString"];
-
+               
             using (var context = new PartsUnlimitedContext(connectionString))
             {
                 var dbProductList = await context.Products.ToListAsync();
